@@ -1,16 +1,12 @@
 import React from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
-import web from "../src/assets/web.pdf";
-import adb from "../src/assets/adb.pdf";
-import NUTEC from "../src/assets/NUTEC.pdf";
-import mmd from "../src/assets/mmd.pdf";
-import Handbook from "../src/assets/Handbook.pdf";
+import mmd from "./assets/mmd.pdf"
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
-function PDFViewer() {
+function PDFViewer({fileUrl}) {
     const [numPages, setNumPages] = React.useState(null);
     const [pageNumber, setPageNumber] = React.useState(1);
-
+    // alert(fileUrl);
     function onDocumentLoadSuccess({ numPages }) {
         setNumPages(numPages);
     }
@@ -22,11 +18,8 @@ function PDFViewer() {
             </p>
             <div className='max-h-screen overflow-y-auto px-[10%]'>
                 <Document
-                    // file={web}
-                    // file={adb}
-                    file={mmd}
-                    // file={NUTEC}
-                    // file={Handbook}
+                    file={fileUrl}
+                   
                     onLoadSuccess={onDocumentLoadSuccess}
                 >
                     {
